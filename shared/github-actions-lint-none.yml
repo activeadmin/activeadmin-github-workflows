@@ -1,0 +1,16 @@
+name: GitHub Actions Lint
+
+on:
+  pull_request:
+    # If updating `paths-ignore` then update github-actions-lint.yml to match
+    paths-ignore:
+      - '.github/workflows/**/*.yaml'
+      - '.github/workflows/**/*.yml'
+
+jobs:
+  github_actions_lint:
+    name: Run actionlint
+    if: false
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Do nothing"

@@ -1,0 +1,23 @@
+name: YAML Lint
+
+on:
+  pull_request:
+    # If updating `paths` then update yamllint-none.yml to match
+    paths:
+      # From: https://yamllint.readthedocs.io/en/stable/configuration.html#default-configuration
+      # Note: GHA requires "**" to match all files in the repository
+      - '**.yaml'
+      - '**.yml'
+
+jobs:
+  yaml_lint:
+    name: Run yamllint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: reviewdog/action-yamllint@v1
+        with:
+          fail_on_error: true
+          filter_mode: nofilter # added (default), diff_context, file, nofilter
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-check

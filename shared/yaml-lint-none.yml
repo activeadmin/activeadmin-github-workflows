@@ -1,0 +1,18 @@
+name: YAML Lint
+
+on:
+  pull_request:
+    # If updating `paths-ignore` then update yamllint.yml to match
+    paths-ignore:
+      # From: https://yamllint.readthedocs.io/en/stable/configuration.html#default-configuration
+      # Note: GHA requires "**" to match all files in the repository
+      - '**.yaml'
+      - '**.yml'
+
+jobs:
+  yaml_lint:
+    name: Run yamllint
+    if: false
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Do nothing"
