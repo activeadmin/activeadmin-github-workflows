@@ -1,0 +1,21 @@
+name: GitHub Actions Lint
+
+on:
+  pull_request:
+    # If updating `paths` then update github-actions-lint-none.yml to match
+    paths:
+      - '.github/workflows/**/*.yaml'
+      - '.github/workflows/**/*.yml'
+
+jobs:
+  github_actions_lint:
+    name: Run actionlint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: reviewdog/action-actionlint@v1
+        with:
+          fail_on_error: true
+          filter_mode: nofilter # added (default), diff_context, file, nofilter
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-check

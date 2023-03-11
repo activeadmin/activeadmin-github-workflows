@@ -1,0 +1,23 @@
+name: Rubocop
+
+on:
+  pull_request:
+    # If updating `paths-ignore` then update rubocop.yml to match
+    paths-ignore:
+      - 'config/rubocop/**/*.yml'
+      - '.rubocop.yml'
+      - '**.arb'
+      - '**.rake'
+      - '**.rb'
+      - '*.gemspec'
+      - 'gemfiles/**/Gemfile*'
+      - 'Gemfile*'
+      - 'Rakefile'
+
+jobs:
+  rubocop:
+    name: Run rubocop
+    if: false
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Do nothing"
