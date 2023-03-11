@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+
+jobs:
+  actionlint:
+    name: Run actionlint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: reviewdog/action-actionlint@v1
+        with:
+          # By default actionlint only checks the `.github/workflows` directory.
+          # Once providing an argument with a path, then all paths must be specified
+          # that we want it to check. Don't provide "yaml" paths.
+          actionlint_flags: >-
+            .github/workflows/*.yml
+            **/*.yml
+          fail_on_error: true
+          filter_mode: nofilter # added (default), diff_context, file, nofilter
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-check
+
+  yaml_lint:
+    name: Run yamllint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: reviewdog/action-yamllint@v1
+        with:
+          fail_on_error: true
+          filter_mode: nofilter # added (default), diff_context, file, nofilter
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-check
