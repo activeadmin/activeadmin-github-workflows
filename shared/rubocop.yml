@@ -22,7 +22,7 @@ jobs:
     name: Run rubocop
     runs-on: ubuntu-latest
     env:
-      BUNDLE_WITHOUT: ${{ vars.REVIEWDOG_RUBOCOP_BUNDLE_WITHOUT || 'default development test release docs' }}
+      BUNDLE_ONLY: ${{ vars.REVIEWDOG_RUBOCOP_BUNDLE_ONLY || 'rubocop' }}
     steps:
       - uses: actions/checkout@v3
       - uses: ruby/setup-ruby@v1
